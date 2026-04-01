@@ -1,0 +1,6 @@
+https://www.figma.com/make/GEkmzHMuA9bZls8PZpxZHo/Loyalty-Program-Web-App?t=KjegZPm8ed5dWpZN-20&fullscreen=1  --- link za vstop v aplikacijo
+
+Ob vstopu je direktno na homepage prijavljenega uporabnika, za spremembo na admin del je potrebno spremeniti link iz recimo
+https://www.figma.com/make/GEkmzHMuA9bZls8PZpxZHo/Loyalty-Program-Web-App?p=f&t=30AniSKUVH6Kl50n-0&fullscreen=1&preview-route=%2Fprijava
+v
+https://www.figma.com/make/GEkmzHMuA9bZls8PZpxZHo/Loyalty-Program-Web-App?p=f&t=30AniSKUVH6Kl50n-0&fullscreen=1&preview-route=%2Fadmin
