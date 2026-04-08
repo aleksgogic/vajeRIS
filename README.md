@@ -1,4 +1,6 @@
-# vajeRIS
+# vajeRIS - aplikacija maestro
+
+## OD TU NAPREJ JE NALOGA IZ PRVE URE VAJE NA PREDAVANJIH ZA APLIKACIJO MAESTRO
 
 ## Funkcionalne zahteve-možno jih je pokazati v appu
 
