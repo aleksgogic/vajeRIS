@@ -1,4 +1,4 @@
-# Načrt backenda (REST API) – Program lojalnosti Maestro
+# Načrt backenda (REST API) – Program lojalnosti Maestro - naredi @openapi dokumentacijo tega
 
 ## 1. Osnovna arhitektura
 
@@ -40,7 +40,11 @@
   "ime": "Janez",
   "priimek": "Novak",
   "email": "janez@example.com",
-  "geslo": "password123"
+  "geslo": "password123",
+  "uporabnisko_ime": "janeznovak",
+  "starots": "20",
+  "telefonska_stevilka": "031 310 456",
+  "naslov": "Ljubljanska cesta 2, 1000 Ljubljana"
 }
 
 Response (201):
