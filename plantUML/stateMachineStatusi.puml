@@ -1,0 +1,17 @@
+@startuml
+
+[*] --> OSNOVNI
+
+OSNOVNI --> SREBRNI : > 499 EUR
+
+SREBRNI --> ZLATI : 3x > 500 EUR
+
+SREBRNI --> BRONASTI : 2 meseca < 200 EUR
+
+ZLATI --> SREBRNI : < 500 EUR
+
+BRONASTI --> SREBRNI : 2x >= 200 EUR
+
+BRONASTI --> OSNOVNI : < 50 EUR
+
+@enduml

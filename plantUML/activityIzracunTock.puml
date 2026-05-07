@@ -1,0 +1,35 @@
+@startuml
+
+start
+
+:Pridobi nakupe iz zunanjega IS;
+
+:Združi nakupe po strankah;
+
+repeat
+
+  :Izračunaj skupni znesek nakupov;
+
+  :Preveri trenutni status;
+
+  :Ovrednoti pravila statusov;
+
+  if (Status se spremeni?) then (DA)
+
+    :Posodobi status;
+
+    :Zapiši zgodovino statusov;
+
+  endif
+
+  :Ovrednoti pravila točkovanja;
+
+  :Dodeli točke;
+
+  :Shrani zgodovino točk;
+
+repeat while (Še obstajajo stranke?)
+
+stop
+
+@enduml

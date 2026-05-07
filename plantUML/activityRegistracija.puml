@@ -1,0 +1,37 @@
+@startuml
+
+start
+
+:Uporabnik odpre registracijo;
+
+:Vnos podatkov;
+
+if (Podatki veljavni?) then (DA)
+
+  :Shrani uporabnika v bazo;
+
+  :Generiraj verifikacijski token;
+
+  :Pošlji potrditveni email;
+
+  if (Email potrjen?) then (DA)
+
+    :Aktiviraj račun;
+    :Dodeli osnovni status;
+    :Kreiraj uporabniški profil;
+
+  else (NE)
+
+    :Račun ostane nepotrjen;
+
+  endif
+
+else (NE)
+
+  :Prikaži napake validacije;
+
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+
+start
+
+:Uporabnik odda zahtevo;
+
+:Preveri ali kartica že obstaja;
+
+if (Kartica obstaja?) then (DA)
+
+  :Prikaži opozorilo;
+
+else (NE)
+
+  :Kreiraj kartico;
+
+  :Poveži kartico z uporabnikom;
+
+  :Označi za tisk/pošiljanje;
+
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+
+node "Client naprava" {
+
+  artifact "Browser"
+
+}
+
+node "Frontend server" {
+
+  artifact "Angular aplikacija"
+
+}
+
+node "Backend server" {
+
+  artifact "Node.js REST API"
+
+}
+
+node "DB Server" {
+
+  database "Oracle DB"
+
+}
+
+node "Mail server" {
+
+  artifact "Email servis"
+
+}
+
+node "Poslovni IS" {
+
+  artifact "Nakupni sistem"
+
+}
+
+Browser --> "Angular aplikacija" : HTTPS
+
+"Angular aplikacija" --> "Node.js REST API" : HTTPS / JSON
+
+"Node.js REST API" --> "Oracle DB" : SQL
+
+"Node.js REST API" --> "Email servis" : SMTP/API
+
+"Node.js REST API" --> "Nakupni sistem" : REST/SOAP
+
+@enduml

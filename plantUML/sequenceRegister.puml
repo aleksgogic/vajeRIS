@@ -1,0 +1,34 @@
+@startuml
+
+actor Gost
+participant Angular
+participant API
+participant "Auth Service" as AUTH
+participant "Email Service" as EMAIL
+database Oracle
+
+Gost -> Angular : Registracija
+
+Angular -> API : POST /register
+
+API -> AUTH : createUser()
+
+AUTH -> Oracle : INSERT uporabnik
+
+Oracle --> AUTH : userId
+
+AUTH -> AUTH : generateVerifyToken()
+
+AUTH -> EMAIL : sendVerificationEmail()
+
+EMAIL --> Gost : Verifikacijski email
+
+Gost -> Angular : Klik na link
+
+Angular -> API : verify-email
+
+API -> Oracle : update verified=true
+
+API --> Gost : Račun potrjen
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+
+participant Cron
+participant API
+participant "Purchase Service" as PURCHASE
+participant "Points Service" as POINTS
+participant "Status Service" as STATUS
+database Oracle
+participant "Zunanji IS" as ZIS
+
+Cron -> API : start calculation
+
+API -> ZIS : pridobi nakupe
+
+ZIS --> API : podatki nakupov
+
+API -> PURCHASE : shrani nakupe
+
+PURCHASE -> Oracle : INSERT purchases
+
+API -> STATUS : evaluate statuses
+
+STATUS -> Oracle : update statuses
+
+API -> POINTS : calculate points
+
+POINTS -> Oracle : save points
+
+API --> Cron : calculation finished
+
+@enduml

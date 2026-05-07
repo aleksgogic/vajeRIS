@@ -1,0 +1,27 @@
+@startuml
+
+actor Uporabnik
+participant Angular
+participant "REST API" as API
+participant "Auth Service" as AUTH
+database Oracle
+
+Uporabnik -> Angular : Vnos email + geslo
+
+Angular -> API : POST /api/auth/login
+
+API -> AUTH : validateCredentials()
+
+AUTH -> Oracle : preveri uporabnika
+
+Oracle --> AUTH : podatki uporabnika
+
+AUTH -> AUTH : generiraj JWT
+
+AUTH --> API : JWT token
+
+API --> Angular : Response(token)
+
+Angular --> Uporabnik : Prijava uspešna
+
+@enduml

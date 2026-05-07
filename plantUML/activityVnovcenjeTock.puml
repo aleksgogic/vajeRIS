@@ -1,0 +1,25 @@
+@startuml
+
+start
+
+:Uporabnik izbere nagrado;
+
+:Preveri število točk;
+
+if (Dovolj točk?) then (DA)
+
+  :Odštej točke;
+
+  :Kreiraj zapis vnovčenja;
+
+  :Potrdi koriščenje;
+
+else (NE)
+
+  :Prikaži napako;
+
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,73 @@
+@startuml
+
+class Uporabnik {
+  +id
+  +email
+  +geslo
+  +vloga
+}
+
+class Stranka {
+  +ime
+  +priimek
+  +telefon
+}
+
+class Administrator {
+  +permissions
+}
+
+class KarticaLojalnosti {
+  +stevilka
+  +status
+}
+
+class Nakup {
+  +znesek
+  +datum
+}
+
+class TockeZvestobe {
+  +steviloTock
+}
+
+class StatusLojalnosti {
+  +naziv
+}
+
+class PraviloStatusa {
+  +minZnesek
+  +maxZnesek
+}
+
+class PraviloTockovanja {
+  +minNakup
+  +tocke
+}
+
+class Nagrada {
+  +naziv
+  +potrebneTocke
+}
+
+class Vnovcenje {
+  +datum
+}
+
+Uporabnik <|-- Stranka
+Uporabnik <|-- Administrator
+
+Stranka "1" -- "1" KarticaLojalnosti
+Stranka "1" -- "*" Nakup
+Stranka "1" -- "*" TockeZvestobe
+
+Stranka "*" -- "1" StatusLojalnosti
+
+StatusLojalnosti "1" -- "*" PraviloStatusa
+
+PraviloTockovanja "*" -- "1" StatusLojalnosti
+
+Stranka "1" -- "*" Vnovcenje
+Vnovcenje "*" -- "1" Nagrada
+
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+
+package "Frontend" {
+
+  [Angular SPA]
+
+}
+
+package "Backend" {
+
+  [REST API]
+  [Auth Service]
+  [Points Service]
+  [Status Service]
+  [Rewards Service]
+  [Admin Service]
+
+}
+
+database "Oracle DB" {
+  [Oracle]
+}
+
+cloud "Zunanji sistemi" {
+
+  [Email servis]
+  [Poslovni IS]
+
+}
+
+[Angular SPA] --> [REST API]
+
+[REST API] --> [Auth Service]
+[REST API] --> [Points Service]
+[REST API] --> [Status Service]
+[REST API] --> [Rewards Service]
+[REST API] --> [Admin Service]
+
+[Auth Service] --> [Oracle]
+[Points Service] --> [Oracle]
+[Status Service] --> [Oracle]
+[Rewards Service] --> [Oracle]
+[Admin Service] --> [Oracle]
+
+[Auth Service] --> [Email servis]
+
+[Points Service] --> [Poslovni IS]
+
+@enduml
