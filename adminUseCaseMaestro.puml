@@ -1,0 +1,93 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam actorStyle awesome
+skinparam linetype ortho
+
+actor Administrator
+
+rectangle "Administracijski sistem" {
+
+  rectangle "Avtentikacija" {
+
+    together {
+      usecase "Prijava administratorja" as UC_ADMIN_LOGIN
+      usecase "Odjava administratorja" as UC_ADMIN_LOGOUT
+      usecase "Validacija JWT" as UC_JWT
+    }
+
+  }
+
+  rectangle "Uporabniki" {
+
+    together {
+      usecase "Pregled uporabnikov" as UC_ADMIN_USERS
+      usecase "Upravljanje strank" as UC_ADMIN_CUSTOMERS
+      usecase "Pregled statusov strank" as UC_ADMIN_STATUS
+    }
+
+  }
+
+  rectangle "Analitika" {
+
+    together {
+      usecase "Pregled statistike nakupov" as UC_ADMIN_STATS
+      usecase "Poizvedbe nad podatki" as UC_ADMIN_QUERY
+    }
+
+  }
+
+  rectangle "Nagrade" {
+
+    together {
+      usecase "Upravljanje nagrad" as UC_ADMIN_REWARDS
+      usecase "Dodajanje nagrade" as UC_ADD_REWARD
+      usecase "Urejanje nagrade" as UC_EDIT_REWARD
+      usecase "Brisanje nagrade" as UC_DELETE_REWARD
+    }
+
+  }
+
+  rectangle "Pravila sistema" {
+
+    together {
+      usecase "Upravljanje pravil točkovanja" as UC_POINTS_RULES
+      usecase "Upravljanje pravil statusov" as UC_STATUS_RULES
+    }
+
+  }
+
+  rectangle "Komunikacija" {
+
+    together {
+      usecase "Pregled kontaktnih sporočil" as UC_MESSAGES
+    }
+
+  }
+
+}
+
+Administrator --> UC_ADMIN_LOGIN
+Administrator --> UC_ADMIN_LOGOUT
+
+Administrator --> UC_ADMIN_USERS
+Administrator --> UC_ADMIN_CUSTOMERS
+Administrator --> UC_ADMIN_STATUS
+
+Administrator --> UC_ADMIN_STATS
+Administrator --> UC_ADMIN_QUERY
+
+Administrator --> UC_ADMIN_REWARDS
+Administrator --> UC_POINTS_RULES
+Administrator --> UC_STATUS_RULES
+
+Administrator --> UC_MESSAGES
+
+UC_ADMIN_LOGIN .> UC_JWT : <<include>>
+
+UC_ADMIN_REWARDS .> UC_ADD_REWARD : <<include>>
+UC_ADMIN_REWARDS .> UC_EDIT_REWARD : <<include>>
+UC_ADMIN_REWARDS .> UC_DELETE_REWARD : <<include>>
+
+@enduml

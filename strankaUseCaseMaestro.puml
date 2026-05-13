@@ -1,0 +1,88 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam actorStyle awesome
+skinparam linetype ortho
+
+actor Stranka
+actor "Zunanji IS" as ZIS
+
+rectangle "Portal stranke" {
+
+  rectangle "Profil" {
+
+    together {
+      usecase "Pregled profila" as UC_PROFILE
+      usecase "Posodobitev profila" as UC_EDIT_PROFILE
+      usecase "Odjava" as UC_LOGOUT
+      usecase "Izbira jezika" as UC_LANGUAGE
+    }
+
+  }
+
+  rectangle "Loyalty program" {
+
+    together {
+      usecase "Pregled statusa" as UC_STATUS
+      usecase "Pregled zgodovine statusov" as UC_STATUS_HISTORY
+    }
+
+    together {
+      usecase "Pregled točk zvestobe" as UC_POINTS
+      usecase "Pregled zgodovine točk" as UC_POINTS_HISTORY
+    }
+
+    together {
+      usecase "Naročilo kartice" as UC_CARD
+      usecase "Pregled kartice" as UC_CARD_INFO
+      usecase "Vnovčenje točk" as UC_REDEEM
+    }
+
+  }
+
+  rectangle "Nakupi" {
+
+    together {
+      usecase "Pregled nakupov" as UC_PURCHASES
+      usecase "Pregled artiklov" as UC_PRODUCTS
+    }
+
+  }
+
+  rectangle "Sistemske funkcije" {
+
+    together {
+      usecase "Pridobivanje podatkov o nakupih" as UC_IMPORT
+      usecase "Dodeljevanje točk" as UC_CALCULATE_POINTS
+      usecase "Sprememba statusa" as UC_CHANGE_STATUS
+    }
+
+  }
+
+}
+
+Stranka --> UC_PROFILE
+Stranka --> UC_EDIT_PROFILE
+Stranka --> UC_LOGOUT
+Stranka --> UC_LANGUAGE
+
+Stranka --> UC_STATUS
+Stranka --> UC_STATUS_HISTORY
+
+Stranka --> UC_POINTS
+Stranka --> UC_POINTS_HISTORY
+
+Stranka --> UC_CARD
+Stranka --> UC_CARD_INFO
+Stranka --> UC_REDEEM
+
+Stranka --> UC_PURCHASES
+Stranka --> UC_PRODUCTS
+
+ZIS --> UC_IMPORT
+
+UC_IMPORT .> UC_CALCULATE_POINTS : <<include>>
+UC_CALCULATE_POINTS .> UC_CHANGE_STATUS : <<include>>
+
+@enduml

@@ -1,0 +1,199 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam actorStyle awesome
+
+actor Gost
+actor Stranka
+actor Administrator
+actor "Zunanji IS" as ZIS
+actor "Email servis" as EMAIL
+
+rectangle "Sistem lojalnosti Maestro" {
+
+' =====================================================
+' JAVNI DEL
+' =====================================================
+
+rectangle "Javna cona" {
+
+  together {
+    usecase "Pregled osnovne strani" as UC_HOME
+    usecase "Registracija stranke" as UC_REGISTER
+    usecase "Prijava" as UC_LOGIN
+    usecase "Pozabljeno geslo" as UC_FORGOT
+    usecase "Ponastavitev gesla" as UC_RESET
+    usecase "Potrditev računa" as UC_VERIFY
+  }
+
+  together {
+    usecase "Pregled nagradnega programa" as UC_REWARDS_PUBLIC
+    usecase "Pregled kontaktnih informacij" as UC_CONTACT_INFO
+    usecase "Pregled pogojev uporabe" as UC_TERMS
+    usecase "Pregled GDPR" as UC_GDPR
+    usecase "Pregled FAQ" as UC_FAQ
+    usecase "Kontaktiranje podpore" as UC_CONTACT
+  }
+}
+
+' =====================================================
+' STRANKA
+' =====================================================
+
+rectangle "Portal stranke" {
+
+  together {
+    usecase "Pregled profila" as UC_PROFILE
+    usecase "Posodobitev profila" as UC_EDIT_PROFILE
+    usecase "Odjava" as UC_LOGOUT
+    usecase "Izbira jezika" as UC_LANGUAGE
+  }
+
+  together {
+    usecase "Pregled statusa" as UC_STATUS
+    usecase "Pregled zgodovine statusov" as UC_STATUS_HISTORY
+    usecase "Pregled točk zvestobe" as UC_POINTS
+    usecase "Pregled zgodovine točk" as UC_POINTS_HISTORY
+  }
+
+  together {
+    usecase "Pregled nakupov" as UC_PURCHASES
+    usecase "Pregled artiklov" as UC_PRODUCTS
+  }
+
+  together {
+    usecase "Naročilo kartice" as UC_CARD
+    usecase "Pregled kartice" as UC_CARD_INFO
+    usecase "Vnovčenje točk" as UC_REDEEM
+  }
+}
+
+' =====================================================
+' ADMIN
+' =====================================================
+
+rectangle "Administracija" {
+
+  together {
+    usecase "Prijava administratorja" as UC_ADMIN_LOGIN
+    usecase "Odjava administratorja" as UC_ADMIN_LOGOUT
+  }
+
+  together {
+    usecase "Pregled uporabnikov" as UC_ADMIN_USERS
+    usecase "Upravljanje strank" as UC_ADMIN_CUSTOMERS
+    usecase "Pregled statusov strank" as UC_ADMIN_STATUS
+  }
+
+  together {
+    usecase "Pregled statistike nakupov" as UC_ADMIN_STATS
+    usecase "Poizvedbe nad podatki" as UC_ADMIN_QUERY
+  }
+
+  together {
+    usecase "Upravljanje nagrad" as UC_ADMIN_REWARDS
+    usecase "Dodajanje nagrade" as UC_ADD_REWARD
+    usecase "Urejanje nagrade" as UC_EDIT_REWARD
+    usecase "Brisanje nagrade" as UC_DELETE_REWARD
+  }
+
+  together {
+    usecase "Upravljanje pravil točkovanja" as UC_POINTS_RULES
+    usecase "Upravljanje pravil statusov" as UC_STATUS_RULES
+    usecase "Pregled kontaktnih sporočil" as UC_MESSAGES
+  }
+}
+
+' =====================================================
+' SISTEMSKE FUNKCIJE
+' =====================================================
+
+rectangle "Sistemske funkcije" {
+
+  together {
+    usecase "Pridobivanje podatkov o nakupih" as UC_IMPORT
+    usecase "Dodeljevanje točk" as UC_CALCULATE_POINTS
+    usecase "Sprememba statusa" as UC_CHANGE_STATUS
+  }
+
+  together {
+    usecase "Pošiljanje potrditvenega emaila" as UC_SEND_VERIFY
+    usecase "Pošiljanje emaila za reset gesla" as UC_SEND_RESET
+  }
+
+  together {
+    usecase "Validacija JWT" as UC_JWT
+    usecase "Validacija vhodnih podatkov" as UC_VALIDATION
+  }
+}
+
+' =====================================================
+' POVEZAVE AKTERJEV
+' =====================================================
+
+Gost --> UC_HOME
+Gost --> UC_REGISTER
+Gost --> UC_LOGIN
+Gost --> UC_FORGOT
+Gost --> UC_REWARDS_PUBLIC
+Gost --> UC_CONTACT_INFO
+Gost --> UC_TERMS
+Gost --> UC_GDPR
+Gost --> UC_FAQ
+Gost --> UC_CONTACT
+
+Stranka --> UC_PROFILE
+Stranka --> UC_EDIT_PROFILE
+Stranka --> UC_STATUS
+Stranka --> UC_STATUS_HISTORY
+Stranka --> UC_POINTS
+Stranka --> UC_POINTS_HISTORY
+Stranka --> UC_PURCHASES
+Stranka --> UC_PRODUCTS
+Stranka --> UC_CARD
+Stranka --> UC_CARD_INFO
+Stranka --> UC_REDEEM
+Stranka --> UC_LANGUAGE
+Stranka --> UC_LOGOUT
+
+Administrator --> UC_ADMIN_LOGIN
+Administrator --> UC_ADMIN_LOGOUT
+Administrator --> UC_ADMIN_USERS
+Administrator --> UC_ADMIN_CUSTOMERS
+Administrator --> UC_ADMIN_STATUS
+Administrator --> UC_ADMIN_STATS
+Administrator --> UC_ADMIN_QUERY
+Administrator --> UC_ADMIN_REWARDS
+Administrator --> UC_POINTS_RULES
+Administrator --> UC_STATUS_RULES
+Administrator --> UC_MESSAGES
+
+ZIS --> UC_IMPORT
+
+EMAIL --> UC_SEND_VERIFY
+EMAIL --> UC_SEND_RESET
+
+' =====================================================
+' INCLUDE
+' =====================================================
+
+UC_REGISTER .> UC_SEND_VERIFY : <<include>>
+UC_FORGOT .> UC_SEND_RESET : <<include>>
+
+UC_LOGIN .> UC_JWT : <<include>>
+UC_ADMIN_LOGIN .> UC_JWT : <<include>>
+
+UC_REGISTER .> UC_VALIDATION : <<include>>
+UC_EDIT_PROFILE .> UC_VALIDATION : <<include>>
+
+UC_IMPORT .> UC_CALCULATE_POINTS : <<include>>
+UC_CALCULATE_POINTS .> UC_CHANGE_STATUS : <<include>>
+
+UC_ADMIN_REWARDS .> UC_ADD_REWARD : <<include>>
+UC_ADMIN_REWARDS .> UC_EDIT_REWARD : <<include>>
+UC_ADMIN_REWARDS .> UC_DELETE_REWARD : <<include>>
+
+}
+
+@enduml
